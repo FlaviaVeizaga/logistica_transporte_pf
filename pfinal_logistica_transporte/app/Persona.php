@@ -8,14 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Persona
  *
- * @property int $id
- * @property string $nombre
- * @property string $apellido
- * @property string $telefono
- * @property string $pais
- * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $users
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona newQuery()
@@ -29,24 +21,30 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona whereUserId($value)
  * @mixin Eloquent
- * @property-read \App\Dadorcarga|null $dadorcargas
- * @property-read \App\Transportista|null $trasportistas
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Persona wherePassword($value)
+ * @property int $id
+ * @property string $nombre
+ * @property string $apellido
+ * @property string $telefono
+ * @property string $pais
+ * @property string $email
+ * @property string $password
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Dadorcarga|null $dadorescargas
+ * @property-read \App\Transportista|null $transportistas
  */
 class Persona extends Model
 {
     //
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function dadorcargas()
+    public function dadorescargas()
     {
         return $this->hasOne(Dadorcarga::class);
     }
 
-    public function trasportistas()
+    public function transportistas()
     {
         return $this->hasOne(Transportista::class);
     }

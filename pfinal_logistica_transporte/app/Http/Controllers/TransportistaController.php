@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transportista;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TransportistaController extends Controller
 {
@@ -25,6 +26,7 @@ class TransportistaController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,6 +38,21 @@ class TransportistaController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $validator = Validator::make($request->json()->all(),
+            [
+                'persona_id' => ['required', 'int']
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(["res" => "error", "reason" => "validation", "message" => $validator->messages()]);
+        }
+
+        $objTransportista = new Transportista();
+        $objTransportista->persona_id = $request->json('persona_id');
+        $objTransportista->save();
+        return $objTransportista->id;
     }
 
     /**

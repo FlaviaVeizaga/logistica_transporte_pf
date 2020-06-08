@@ -2,13 +2,13 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col'
-
+/*
 class Register extends React.Component {
 
     constructor(args) {
         super(args)
         this.state = {
-           newUser ={
+         /*  newUser ={
             name: '',
             email: '',
             password: '',
@@ -42,18 +42,7 @@ class Register extends React.Component {
      
     onChange(e) {
     
-       /*     this.setState({
-                [e.target.name]: e.target.value,
-                [e.target.email]: e.target.value,
-                [e.target.password]: e.target.value,
-                [e.target.password1]: e.target.value,
-                [e.target.nombre]: e.target.value,
-                [e.target.apellido]: e.target.value,
-                [e.target.telefono]: e.target.value,
-                [e.target.tipo]: e.target.value,
-                [e.target.country]: e.target.value
-            })
-        */
+  
     }
 
     
@@ -73,15 +62,6 @@ class Register extends React.Component {
         }
 
 
-        const name = document.querySelector('#name').value;
-        const email = document.querySelector('#email').value;
-        const password = document.querySelector('#password').value;
-        const password1 = document.querySelector('#password1').value;
-        const nombre = document.querySelector('#nombre').value;
-        const apellido = document.querySelector('#apellido').value;
-        const telefono = document.querySelector('#telefono').value;
-        const pais = document.querySelector('#pais').value;
-        const tipo_usuario = document.querySelector('#tipo_usuario').value;
 
 
 
@@ -219,4 +199,4 @@ class Register extends React.Component {
 
 }
 
-export default Register
+export default Register*/

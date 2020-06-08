@@ -21,12 +21,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transportista whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transportista wherePersonaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transportista whereUpdatedAt($value)
+ * @property-read \App\Persona $users
  */
 class Transportista extends Model
 {
     //
 
-    public function personas()
+    public function users()
     {
         return $this->belongsTo(Persona::class);
     }

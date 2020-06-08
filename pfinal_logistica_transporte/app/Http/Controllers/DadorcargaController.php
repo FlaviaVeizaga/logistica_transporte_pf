@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dadorcarga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DadorcargaController extends Controller
 {
@@ -36,6 +37,20 @@ class DadorcargaController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validator = Validator::make($request->json()->all(),
+            [
+                'persona_id' => ['required', 'int']
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(["res" => "error", "reason" => "validation", "message" => $validator->messages()]);
+        }
+
+        $objDadorCarga = new Dadorcarga();
+        $objDadorCarga->persona_id = $request->json('persona_id');
+        $objDadorCarga->save();
+        return $objDadorCarga->id;
     }
 
     /**

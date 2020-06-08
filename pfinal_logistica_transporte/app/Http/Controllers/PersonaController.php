@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Dadorcarga;
 use App\Persona;
-use App\Transportista;
-use http\Exception;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PersonaController extends Controller
 {
@@ -52,8 +50,8 @@ class PersonaController extends Controller
                 'apellido' => ['required', 'string', 'max:255'],
                 'telefono' => ['required', 'string', 'max:8'],
                 'pais' => ['required', 'string', 'max:255'],
-                'user_id' => ['required', 'biginteger'],
-                'tipo' => ['required', 'string']
+                'email' => ['required', 'string', 'unique:personas'],
+                'password' => ['required', 'string']
             ]
         );
         if ($validator->fails()) {
@@ -65,42 +63,10 @@ class PersonaController extends Controller
         $objPersona->apellido = $request->json('apellido');
         $objPersona->telefono = $request->json('telefono');
         $objPersona->pais = $request->json('pais');
-        $objPersona->user_id = $request->json('user_id');
-
-        try {
-            $objPersona->save();
-            $user_id = $objPersona->id;
-            $tipo = $request->json('tipo');
-            switch ($tipo) {
-                case 'dador':
-                    $objDador = new Dadorcarga();
-                    $objDador->persona_id = $user_id;
-                    try {
-                        $objDador->save();
-                    } catch (Exception $e) {
-                        return response()->json(['res' => 'error', 'message' => 'Error al ejecutar consulta']);//status 500
-                    }
-
-                    return response()->json(['res' => 'Dador de carga Creado', 'data' => $objPersona]);
-                    break;
-                case 'transportista':
-                    $objTransportista = new Transportista();
-                    $objTransportista->persona_id = $user_id;
-                    try {
-                        $objTransportista->save();
-                    } catch (Exception $e) {
-                        return response()->json(['res' => 'error', 'message' => 'Error al ejecutar consulta']);//status 500
-                    }
-
-                    return response()->json(['res' => 'Transportista Creado', 'data' => $objPersona]);
-                    break;
-            }
-
-        } catch (\Exception $e) {
-            return response()->json(['res' => 'error', 'message' => 'Error al ejecutar consulta']);//status 500
-        }
-
-        return response()->json(['res' => 'success', 'data' => $objPersona]);
+        $objPersona->email = $request->json('email');
+        $objPersona->password = Hash::make(request()['password']);
+        $objPersona->save();
+        return $objPersona->id;
     }
 
     /**
