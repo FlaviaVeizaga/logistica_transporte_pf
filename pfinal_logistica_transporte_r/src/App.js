@@ -5,11 +5,11 @@ import browserHistory from './config/history'
 import Login from './views/login/Login'
 import Home from './views/home/Home'
 import ChangePassword from './views/changepassword/ChangePassword'
-//import Register from './views/register/Register'
 import Tienda from './views/Tienda/Tienda';
 import FormularioTienda from './views/Formularios/FormularioTienda';
 import FormularioTransporte from './views/Formularios/FormularioTransporte';
 import Registro from './views/register/Registro';
+import formulariotipo from './views/Formularios/formulariotipo';
 
 class App extends React.Component {
   render() {
@@ -28,6 +28,7 @@ class App extends React.Component {
             <Route path='/Tienda' component={Tienda} />
             <Route path='/FormularioTienda' component={FormularioTienda} />
             <Route path='/FormularioTransporte' component={FormularioTransporte} />
+            <Route path='/Tipo/:persona_id' component={formulariotipo} />
 
           </Switch>
         </Router>

@@ -5,6 +5,11 @@ import Form from 'react-bootstrap/Form';
 
 class Login extends React.Component {
 
+
+    login(){
+        
+    }
+
     render() {
         return (
             <Container>

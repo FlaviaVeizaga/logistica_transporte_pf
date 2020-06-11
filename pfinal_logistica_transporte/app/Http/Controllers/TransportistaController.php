@@ -52,7 +52,8 @@ class TransportistaController extends Controller
         $objTransportista = new Transportista();
         $objTransportista->persona_id = $request->json('persona_id');
         $objTransportista->save();
-        return $objTransportista->id;
+        return response()->json(["res" => "Transportista de cargar insertado correctamente", "id" => $objTransportista->id]);
+
     }
 
     /**

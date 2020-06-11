@@ -31,7 +31,7 @@ class DadorcargaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,13 +50,14 @@ class DadorcargaController extends Controller
         $objDadorCarga = new Dadorcarga();
         $objDadorCarga->persona_id = $request->json('persona_id');
         $objDadorCarga->save();
-        return $objDadorCarga->id;
+
+        return response()->json(["res" => "Dador de cargar insertado correctamente", "persona_id" => $objDadorCarga->id]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dadorcarga  $id
+     * @param \App\Dadorcarga $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +68,7 @@ class DadorcargaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Dadorcarga  $id
+     * @param \App\Dadorcarga $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -78,8 +79,8 @@ class DadorcargaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dadorcarga  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Dadorcarga $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,7 +91,7 @@ class DadorcargaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Dadorcarga  $id
+     * @param \App\Dadorcarga $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
