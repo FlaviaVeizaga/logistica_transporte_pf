@@ -114,7 +114,6 @@ class PersonaController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
 
         $objPersona = Persona::find($id);
         if ($objPersona == null) {
@@ -132,8 +131,12 @@ class PersonaController extends Controller
         if ($request->json('pais') != null) {
             $objPersona->pais = $request->json('pais');
         }
-        if ($request->json('user_id') != null) {
-            $objPersona->user_id = $request->json('user_id');
+        if ($request->json('email') != null) {
+            $objPersona->email = $request->json('email');
+        }
+
+        if ($request->json('password') != null) {
+            $objPersona->password = Hash::make(request()['password']);
         }
         try {
             $objPersona->save();

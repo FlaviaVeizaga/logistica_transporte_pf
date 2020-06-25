@@ -2,30 +2,66 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+//import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+
 
 class Login extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: 0,
+            email: '',
+            password: '',
+            tipo:''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    login(){
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    handleSubmit(event) {
+        this.verificarDatos()
+    }
+
+    verificarDatos(){
+
         
     }
+
 
     render() {
         return (
             <Container>
                 <Form style={{ width: '35%', marginLeft: 'auto', marginRight: 'auto', color: '#6c757d' }}>
-                    <Form.Group style={{ margin: '10px', textAlign: 'left' }}>
-                        <Form.Label>Correo Electrónico </Form.Label>
-                        <Form.Control id="email" placeholder="Ingrese su correo electrónico" type="text" />
-                    </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} style={{ margin: '10px', textAlign: 'left' }}>
+                            <Form.Label htmlFor="email">Email:</Form.Label>
+                            <Form.Control name="email" id="email" type="text"
+                                onChange={this.handleChange} />
+                        </Form.Group>
+                    </Form.Row>
 
-                    <Form.Group style={{ margin: '10px', textAlign: 'left' }}>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control id="password" placeholder="Ingrese su contraseña" type="password" />
-                    </Form.Group>
+                    <Form.Row style={{ textAlign: 'left' }}>
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmform="password">Contrasena:  </Form.Label>
+                            <Form.Control name="password" id="password" type="password"
+                                onChange={this.handleChange} />
+                        </Form.Group>
+                    </Form.Row>
 
-                    <Form.Group style={{ textAlign: 'center', marginTop: '30px' }}>
-                        <Button style={{ width: '130px', marginLeft: 'auto', marginRight: 'auto' }} onClick={this.login}>Login</Button>
+                    <Form.Group style={{ margin: '10px', textAlign: 'center' }}>
+                        <Form.Row>
+                            <Button style={{ marginLeft: 'auto', marginRight: 'auto' }} id='registrar'
+                                onClick={this.handleSubmit}> Login</Button>
+                        </Form.Row>
                     </Form.Group>
 
                     <Form.Group style={{ textAlign: 'center' }}>

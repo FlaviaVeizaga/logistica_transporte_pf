@@ -22,7 +22,6 @@ class formulariotipo extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-        console.log(this.state.tipo)
     }
 
     handleSubmit(event) {
@@ -37,24 +36,24 @@ class formulariotipo extends React.Component {
     }
 
     insertDadorCarga() {
-        const dadorcarga ={
+        const dadorcarga = {
             persona_id: this.state.persona_id
         }
         axios.post("http://localhost:8000/api/dadorescarga", dadorcarga)
             .then((respuesta) => {
                 if (respuesta.data.res === 'error') {
-                    alert(respuesta.data.res)
-                    return
+                    alert(respuesta.data.res+ 'no se pudo agregar ')
                 } else {
-                    alert(respuesta.data.res + ' id: ' + dadorcarga.persona_id)
-                    history.push('/')
+                    const id = dadorcarga.persona_id
+                    console.log(respuesta.data.res + ' id del dador formulario tipo: ' + id)
+                    history.push('/DadorCarga/Home/' + id)
                 }
             })
     }
 
 
     insertTransportista() {
-        const transportista ={
+        const transportista = {
             persona_id: this.state.persona_id
         }
         axios.post("http://localhost:8000/api/transportistas", transportista)
@@ -63,8 +62,9 @@ class formulariotipo extends React.Component {
                     alert(respuesta.data.res)
                     return
                 } else {
-                    alert(respuesta.data.res + ' id: ' + transportista.persona_id)
-                    history.push('/')
+                    const id = transportista.persona_id
+                    console.log(respuesta.data.res + ' id del dador formulario tipo: ' + id)
+                    history.push('/Transportista/Home/' + id)
                 }
             })
     }
