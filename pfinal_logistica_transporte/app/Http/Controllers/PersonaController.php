@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dadorcarga;
 use App\Persona;
-use App\Transportista;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -80,6 +78,8 @@ class PersonaController extends Controller
     public function show($id)
     {
         //
+
+
         $objPersona = null;
         try {
             $objPersona = Persona::find($id);

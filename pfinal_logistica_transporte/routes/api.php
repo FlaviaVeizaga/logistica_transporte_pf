@@ -23,3 +23,6 @@ Route::resource('/transportistas','TransportistaController');
 
 Route::resource('/dadorescarga','DadorcargaController');
 
+Route::resource('/Login','MisessionController');
+
+//Auth::routes();

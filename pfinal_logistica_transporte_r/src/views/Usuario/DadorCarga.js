@@ -1,23 +1,23 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
-import MenuDadorCarga from '../menu/MenuDadorCarga'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Tab from 'react-bootstrap/Tab'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Table from 'react-bootstrap/Table'
 import history from '../../config/history'
+import NavBarMenu from '../menu/NavBarMenu';
+import Perfil from './Perfil';
 
 class DadorCarga extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            id: props.match.params ? props.match.params.id : { id: 0 },
+            id: 0,
             listaTiendas: [],
             nombre: '',
             apellido: '',
@@ -25,93 +25,40 @@ class DadorCarga extends React.Component {
             pais: '',
             email: '',
         }
-        this.handleOnClick = this.handleOnClick.bind(this);
     }
-
-
-    componentDidMount() {
-        if (this.state.id !== undefined) {
-            console.log("DADOR DE CARGA CON ID " + this.state.id)
-            this.cargarDatos();
-        } else {
-            alert("error al leer los datos " + this.state.id)
-            console.log(this.props)
-        }
-    }
-
-    handleOnClick(event){
-        event.preventDefault();
-        history.push('/Personas/Editar/'+this.state.id);
-    }
-
-    cargarDatos() {
-        try {
-            axios.get("http://localhost:8000/api/personas/" + this.state.id)
-                .then(
-                    (result) => {
-                        if (result.data.res === 'success') {
-                            let response = result.data.data;
-                            this.setState({
-                                nombre: response.nombre,
-                                apellido: response.apellido,
-                                telefono: response.telefono,
-                                pais: response.pais,
-                                email: response.email
-                            });
-
-                        } else
-                            alert(result.data.res);
-
-                    }
-                )
-        } catch (error) {
-            console.log(error);
-
-        }
-    }
-
 
 
     render() {
         return (
 
             <div>
-                <MenuDadorCarga />
-                <h1 style={{ margin: '20px' }}>Dador de carga: {this.state.nombre + ' ' + this.state.apellido}</h1>
+                <NavBarMenu />
                 <Card style={{ padding: '20px', margin: '20px' }}>
                     <Row >
                         <Col sm={3}>
-                            <Container style={{}}>
-                                <Card style={{ width: '18rem', padding: '15px' }}>
-                                    <img src={process.env.PUBLIC_URL + '/img/jorge.jpg'} alt="Perfil Jorge" />
-                                    <Card.Title style={{ textAlign: 'left' }}>Contacto: {this.state.telefono}</Card.Title>
-                                    <Card.Title style={{ textAlign: 'left' }}>Pais: {this.state.pais}</Card.Title>
-                                    <Card.Title style={{ textAlign: 'left' }}>Email: {this.state.email}</Card.Title>
-                                    <Button onClick ={this.handleOnClick}>Editar Perfil</Button>
-                                </Card>
-                            </Container>
+                            <Perfil/>
                         </Col>
                         <Col sm={9}>
                             <Container>
                                 <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
                                     <Row>
-                                        <Col sm={4}>
+                                        <Col sm={3}>
                                             <ListGroup>
-                                                <ListGroup.Item variant='warning' action href="#link1">
+                                                <ListGroup.Item variant='secondary' action href="#link1">
                                                     Inicio
                                             </ListGroup.Item>
-                                                <ListGroup.Item variant='warning' action href="#link2">
+                                                <ListGroup.Item variant='secondary' action href="#link2">
                                                     Viajes
                                             </ListGroup.Item>
-                                                <ListGroup.Item variant='warning' action href="#link3">
+                                                <ListGroup.Item variant='secondary' action href="#link3">
                                                     Mis Usuarios
                                             </ListGroup.Item>
-                                            <ListGroup.Item variant='warning' action href="#link4">
+                                                <ListGroup.Item variant='secondary' action href="#link4">
                                                     Mis Cuentas
                                             </ListGroup.Item>
                                             </ListGroup>
                                         </Col>
-                                        <Col sm={8}>
+                                        <Col sm={9}>
                                             <Tab.Content>
                                                 <Tab.Pane eventKey="#link1">
                                                     <h1>Datos informativos sobre el Dador de Carga</h1>
@@ -125,7 +72,7 @@ class DadorCarga extends React.Component {
                                                 </Tab.Pane>
                                                 <Tab.Pane eventKey="#link2">
                                                     <Card>
-                                                        <h1>Viajes Disponibles</h1><Button variant='success'>Crear Nuevo Viaje</Button>
+                                                        <h1>Viajes Disponibles</h1><Button variant='secondary'>Crear Nuevo Viaje</Button>
                                                         <Table>
                                                             <thead>
                                                                 <tr>

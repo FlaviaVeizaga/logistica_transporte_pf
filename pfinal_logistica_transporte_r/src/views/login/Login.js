@@ -14,7 +14,7 @@ class Login extends React.Component {
             id: 0,
             email: '',
             password: '',
-            tipo:''
+            tipo: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,15 +31,17 @@ class Login extends React.Component {
         this.verificarDatos()
     }
 
-    verificarDatos(){
+    verificarDatos() {
 
-        
+
     }
 
 
     render() {
         return (
             <Container>
+                <Form.Label ></Form.Label>
+
                 <Form style={{ width: '35%', marginLeft: 'auto', marginRight: 'auto', color: '#6c757d' }}>
                     <Form.Row>
                         <Form.Group as={Col} style={{ margin: '10px', textAlign: 'left' }}>
@@ -59,7 +61,7 @@ class Login extends React.Component {
 
                     <Form.Group style={{ margin: '10px', textAlign: 'center' }}>
                         <Form.Row>
-                            <Button style={{ marginLeft: 'auto', marginRight: 'auto' }} id='registrar'
+                            <Button variant='secondary' action style={{ marginLeft: 'auto', marginRight: 'auto' }} id='registrar'
                                 onClick={this.handleSubmit}> Login</Button>
                         </Form.Row>
                     </Form.Group>
@@ -69,6 +71,7 @@ class Login extends React.Component {
                         <a id='btnRec' href="RecoverPassword" name="OlvideContrasena">
                             olviste tu contraseña?
                             </a>
+                            <a style={{ marginLeft: '5px' }} id='btnTengoInvitacion' href='/Formulario/Invitado'>Tengo código de Acceso</a>
                     </Form.Group>
                 </Form>
             </Container>

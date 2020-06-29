@@ -1,12 +1,11 @@
 import React from 'react';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import history from '../../config/history';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col'
 
-class Registro extends React.Component {
-
+class RegistroInvitado extends React.Component{
 
     constructor(props) {
         super(props)
@@ -19,7 +18,7 @@ class Registro extends React.Component {
             email: '',
             password: '',
             password1: '',
-            persona_id: 0
+            codigo_acceso:''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -36,6 +35,7 @@ class Registro extends React.Component {
         event.preventDefault();
         this.enviarDatos();
     }
+
     enviarDatos() {
         if (this.state.password !== this.state.password1) {
             alert('las contrasenas no coinciden');
@@ -68,16 +68,19 @@ class Registro extends React.Component {
                     return
                 } else {
                     this.setState({
-                        persona_id: response.data.persona_id
+                        id: response.data.persona_id
                     })
+                    
+                    window.localStorage.setItem('id', response.data.persona_id);
+                    window.localStorage.setItem('perfil','Principal')
+                    history.push('/Perfil')
 
-                    history.push('/Tipo/'+this.state.persona_id)
-                    console.log(response.data.res)
 
                 }
             })
 
     }
+
 
     render() {
         return (
@@ -109,7 +112,7 @@ class Registro extends React.Component {
                                 onChange={this.handleChange} />
                         </Form.Group>
                     </Form.Row>
- 
+
                     <Form.Row>
                         <Form.Group as={Col} style={{ margin: '10px', textAlign: 'left' }}>
                             <Form.Label htmlFor="email">Email:</Form.Label>
@@ -132,9 +135,15 @@ class Registro extends React.Component {
                         </Form.Group>
                     </Form.Row>
 
+                    <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmform="codigo_acceso">Codigo de Acceso: </Form.Label>
+                            <Form.Control name="codigo_acceso" id="codigo_acceso" type="password"
+                                onChange={this.handleChange} />
+                        </Form.Group>
+
                     <Form.Group style={{ margin: '10px', textAlign: 'center' }}>
                         <Form.Row>
-                            <Button style={{ margin: '10px', width: '30%', marginLeft: '30%' }} id='registrar'
+                            <Button variant='secondary' action style={{ margin: '10px', width: '30%', marginLeft: '30%' }} id='registrar'
                                 onClick={this.handleSubmit}> Registrar</Button>
                             <a style={{ margin: '10px' }} href='/'>Volver</a>
                         </Form.Row>
@@ -143,6 +152,6 @@ class Registro extends React.Component {
             </Form>
         )
     }
-}
 
-export default Registro;
+}
+export default RegistroInvitado;
